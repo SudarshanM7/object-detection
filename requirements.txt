@@ -35,9 +35,6 @@ scipy==1.7
 six==1.14.0
 sklearn==0.0
 spacy==3.2.1
-tensorboard==1.14.0
-tensorflow==2.6.0
-tensorflow-estimator==2.6.0
 termcolor==1.1.0
 urllib3==1.25.9
 Werkzeug==1.0.1
