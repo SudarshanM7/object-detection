@@ -3,7 +3,6 @@ import pandas as pd
 import pickle
 import sklearn
 import json
-import requests
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Ignore the warnings
