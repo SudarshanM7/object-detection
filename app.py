@@ -1,10 +1,15 @@
 from flask import Flask, redirect, url_for, render_template, request
-from model import recommend_products
+import pandas as pd
+import pickle
+import sklearn
+from sklearn.feature_extraction.text import TfidfVectorizer
+from model import predict_top5
+
+# Ignore the warnings
+import warnings
+warnings.filterwarnings(action='ignore')
 
 app = Flask(__name__)
-ml_model_path = 'models/ML_Model.sav'
-rec_sys_path = 'models/Recommendation_System.sav'
-data_df = 'ab'
 
 @app.route('/')
 def index():
@@ -14,10 +19,11 @@ def index():
 def ml_predictions():
   if (request.method == "POST"):
     uname = request.form.get("username")
-    top_5 = recommend_products(uname, data_df, ml_model_path, rec_sys_path)
-  text = "The top 5 product recommendations for "+uname+" is<br>"+top_5
-  return text
+    top_5 = predict_top5()
+    text = "The top 5 product recommendations for the username <b>"+uname+"</b> are: <br><br>"+"<br>".join(top_5)
+    return text
+  elif(request.method == "GET"):
+    return render_template('index.html')
 
 if __name__ == '__main__':
   app.run(debug=True)
-  
